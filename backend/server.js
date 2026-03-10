@@ -5,12 +5,12 @@ import fileUpload from "express-fileupload";
 import userRouter from "./router/user_router.js";
 import { v2 as cloudinary } from 'cloudinary';
 import blogrouter from "./router/blog_router.js";
-
+import cookieParser from "cookie-parser"
 const app=express();
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded())
-
+app.use(cookieParser())
 app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/tmp/"

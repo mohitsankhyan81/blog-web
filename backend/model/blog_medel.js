@@ -24,18 +24,16 @@ const blogSchema=new mongoose.Schema({
         required:true,
         minlength:[20,"Should contatin almonst 200 characters"]
     },
-    // adminName:{
-    //     type:String,
-    //     required:true,
-    // },
-    // adminPhoto:{
-    //     type:String,
-    //     required:true
-    // },
-    // createby:{
-    //     type:mongoose.Schema.ObjectId,
-    //     ref:"User",
-    // }
+    adminName:{
+        type:String,
+    },
+    adminPhoto:{
+        type:String,
+    },
+    createby:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+    }
 })
 
 export const Blog=mongoose.model("Blog",blogSchema);

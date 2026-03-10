@@ -26,20 +26,25 @@ export const createBlog = async (req,res)=>{
         const cloudinaryResponse = await cloudinary.uploader.upload(
             blogImage.tempFilePath
         );
+        const adminName=req?.user?.name;
+        const adminPhoto=req?.user?.photo;
+        const createby=req?.user?._id;
         const blogsave = await Blog.create({
             title,
             about,
             cat,
+            adminName,
+            adminPhoto,
             blogImage:{
                 public_id: cloudinaryResponse.public_id,
                 url: cloudinaryResponse.url
-            }
+            },
+            createby
         });
 
         res.status(200).json({
             message:"blog created successfully",
-            blogsave,
-            token:token
+            blogsave
         });
 
     }catch(error){
