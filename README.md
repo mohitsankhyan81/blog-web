@@ -27,6 +27,7 @@ At the end, the data is saved in the database using:
 
 ```javascript
 new data.save();
+```
 
 # Blog App Frontend
 
