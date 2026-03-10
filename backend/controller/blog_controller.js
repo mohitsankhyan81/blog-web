@@ -1,5 +1,6 @@
 import {v2 as cloudinary} from "cloudinary"
 import { Blog } from "../model/blog_medel.js";
+import { createjsonWebToken } from "../auth/authtoken.js";
 
 export const createBlog = async (req,res)=>{
     try{
@@ -9,9 +10,10 @@ export const createBlog = async (req,res)=>{
         }
 
         const { blogImage } = req.files;
-        const { title, about, category } = req.body;
-
-        if(!title || !about || !category){
+        console.log(blogImage)
+        const { title, about, cat } = req.body;
+        console.log(title,about,cat);
+        if(!title || !about || !cat){
             return res.status(400).json({message:"All fields are required"});
         }
 
@@ -24,11 +26,10 @@ export const createBlog = async (req,res)=>{
         const cloudinaryResponse = await cloudinary.uploader.upload(
             blogImage.tempFilePath
         );
-
         const blogsave = await Blog.create({
             title,
             about,
-            category,
+            cat,
             blogImage:{
                 public_id: cloudinaryResponse.public_id,
                 url: cloudinaryResponse.url
@@ -37,7 +38,8 @@ export const createBlog = async (req,res)=>{
 
         res.status(200).json({
             message:"blog created successfully",
-            blogsave
+            blogsave,
+            token:token
         });
 
     }catch(error){
