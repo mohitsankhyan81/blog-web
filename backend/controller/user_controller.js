@@ -1,8 +1,10 @@
 import { User } from "../model/user_model.js";
 import bcrypt from "bcrypt"
 import { v2 as cloudinary } from 'cloudinary';
+import { createjsonWebToken } from "../auth/authtoken.js";
 
 export const register=async(req,res)=>{
+    try{
     if(!req.files || !req.files.photo){
         return res.status(400).json({message:"user photo is required"});
     }
@@ -41,6 +43,59 @@ export const register=async(req,res)=>{
 
 
     if(newUser){
-        res.status(201).json({message:"user register sucessfully",newUser:newUser});
+        const token= await createjsonWebToken(newUser._id,res)
+        res.status(201).json({message:"user register sucessfully",newUser:newUser,token:token});
+    }
+}
+catch(error){
+    console.log("error in the register fucntion " , error);
+}
+}
+
+export const login=async(req,res)=>{
+    const {email,role,password}=req.body;
+    try{
+        if(!email || !role || !password){
+            res.status(400).json({message:"Fill all the required fields"});
+        }
+
+        const user=await User.findOne({email}).select("+password");
+        if(!user.password){
+            return res.status(400).json({message:"Password field is missing"});
+        }
+
+        const isMatch=await bcrypt.compare(password,user.password);
+        if(!user || !isMatch){
+            return res.status(400).json({messege:"User password not match"})
+        }
+
+        if(user.role !=role){
+            return res.status(400).json({message:`Given role ${role} not found`})
+        }
+        const token=await createjsonWebToken(user._id,res);
+        res.status(200).json({message:"user login Successfuly",
+            user:{
+                _id:user._id,
+                name:user.name,
+                email:user.email,
+                role:user.role
+            },
+            token:token
+        })
+    }
+    catch(error){
+        console.log("Error in the login ",error);
+        return res.status(400).json({message:"Error comes in the login function"})
+    }
+}
+
+export const logout=(req,res)=>{
+    try{
+    res.clearCookie("jwt",{httpOnly:true});
+    return res.status(200).json({message:"Logout sucessfully"});
+    }
+    catch(error){
+        console.log("There is internal server error");
+        return res.status(500).json({message:"This is the internal server error"});
     }
 }

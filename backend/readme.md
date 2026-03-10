@@ -29,3 +29,5 @@ For uploading the user photo, I set up **Cloudinary**.
 First, I installed the **cloudinary** library to upload images to Cloudinary.
 
 Then I installed **express-fileupload** to handle file uploads in the server.
+
+use the jwt token for the sign up

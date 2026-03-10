@@ -29,6 +29,14 @@ At the end, the data is saved in the database using:
 new data.save();
 ```
 
+For uploading the user photo, I set up **Cloudinary**.
+
+First, I installed the **cloudinary** library to upload images to Cloudinary.
+
+Then I installed **express-fileupload** to handle file uploads in the server.
+
+use the jwt token for the sign up
+
 # Blog App Frontend
 
 In the frontend, I created a **React** application using **Vite**.
