@@ -34,5 +34,6 @@ new data.save();
 In the frontend, I created a **React** application using **Vite**.
 
 First, the project is created using the following command:
-
-npm create vite@latest
+```javascript
+npm create vite@latest;
+```
