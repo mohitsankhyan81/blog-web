@@ -1,12 +1,27 @@
 import express from "express"
 import mongoose from "mongoose";
 import dotenv from "dotenv"
+import fileUpload from "express-fileupload";
 import userRouter from "./router/user_router.js";
+import { v2 as cloudinary } from 'cloudinary';
+
 const app=express();
 dotenv.config();
 app.use(express.json());
+
+app.use(fileUpload({
+    useTempFiles:true,
+    tempFileDir:"/tmp/"
+}))
+
+cloudinary.config({ 
+    cloud_name:process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret:process.env.API_SECRET
+});
+const MONGO_URI=process.env.MONGO_URI;
 try{
-    mongoose.connect(process.env.MONGO_URI);
+    mongoose.connect(MONGO_URI);
     console.log("Connect Sucessfully");
 }
 catch(error){

@@ -22,3 +22,10 @@ At the end, the data is saved in the database using:
 
 ```javascript
 new data.save();
+```
+
+For uploading the user photo, I set up **Cloudinary**.
+
+First, I installed the **cloudinary** library to upload images to Cloudinary.
+
+Then I installed **express-fileupload** to handle file uploads in the server.

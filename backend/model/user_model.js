@@ -24,10 +24,16 @@ const userSchema=new mongoose.Schema({
         type:String,
         enum:["user","admin"]
     },
-    // photo:{
-    //     required:true,
-    //     type:String
-    // },
+    photo:{
+        public_id:{
+            required:true,
+            type:String
+        },
+        url:{
+            required:true,
+            type:String
+        }
+    },
     password:{
         required:true,
         type:String,
