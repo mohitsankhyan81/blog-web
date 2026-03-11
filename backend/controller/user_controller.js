@@ -101,11 +101,23 @@ export const logout=(req,res)=>{
 }
 
 export const myprofile=async(req,res)=>{
-    const user=await req.user;
-    return res.status(200).json(user);
+    try{
+         const user=await req.user;
+        return res.status(200).json(user);
+    }
+    catch(error){
+        console.log("eror in the myprofile function",error);
+        return res.status(400).json({message:"error in the my profile function"});
+    }
 }
 
 export const adminprofile=async(req,res)=>{
-    const admins=await User.find({role:"admin"});
-    return res.status(200).json(admins);
+    try{
+        const admins=await User.find({role:"admin"});
+        return res.status(200).json(admins);
+    }
+    catch(error){
+        console.log("error in the adminprofile ",error);
+        return res.status(400).json({message:"error in the admin profile fuction"});
+    }
 }

@@ -69,8 +69,15 @@ export const deleteblog=async(req,res)=>{
 }
 
 export const getallblog=async(req,res)=>{
+    try{
     const allblog=await Blog.find();
     return res.status(200).json(allblog);
+    }
+    catch(error){
+        console.log("error inthe getallblogs");
+        return res.status(400).json({message:"error when you get all blogs"});
+    }
+
 }
 
 export const getsingleblog=async(req,res)=>{
@@ -89,9 +96,15 @@ export const getsingleblog=async(req,res)=>{
 }
 
 export const createbyme=async(req,res)=>{
+    try{
     const userid=req.user._id;
     const myblog=await Blog.find({createby:userid});
     return res.status(200).json(myblog);
+    }
+    catch(error){
+        console.log("error when we get blog that is created by me",error);
+        return res.status(400).json({message:"error when we get blog that is created by me"});
+    }
 }
 
 
