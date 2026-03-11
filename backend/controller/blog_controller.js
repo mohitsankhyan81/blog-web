@@ -1,7 +1,6 @@
 import {v2 as cloudinary} from "cloudinary"
 import { Blog } from "../model/blog_medel.js";
-import { createjsonWebToken } from "../auth/authtoken.js";
-
+import mongoose from "mongoose";
 export const createBlog = async (req,res)=>{
     try{
 
@@ -51,4 +50,65 @@ export const createBlog = async (req,res)=>{
         console.log(error);
         res.status(500).json({message:"Internal server error"});
     }
+}
+
+export const deleteblog=async(req,res)=>{
+    try{
+    const {id}=req.params;
+    const blog=await Blog.findById(id);
+    if(!blog){
+        return res.status(400).json({message:"Blog not found"})
+    }
+    await Blog.findByIdAndDelete()
+    res.status(200).json({message:"Blog delete sucessfully"});
+}
+    catch(error){
+        console.log("Errror in the delete blog ", error);
+        return res.status(400).json({message:"error in the delete blog"});
+    }
+}
+
+export const getallblog=async(req,res)=>{
+    const allblog=await Blog.find();
+    return res.status(200).json(allblog);
+}
+
+export const getsingleblog=async(req,res)=>{
+    try{
+    const {id}=req.params;
+    const blog=await Blog.findById(id);
+    if(!blog){
+        return res.status(400).json({message:"Blog is not found"});
+    }
+    res.status(200).json(blog)
+    }
+    catch(error){
+        console.log("error in the getsingleblog ",error);
+        return res.status(400).json({message:"error in the getsingleblog"})
+    }
+}
+
+export const createbyme=async(req,res)=>{
+    const userid=req.user._id;
+    const myblog=await Blog.find({createby:userid});
+    return res.status(200).json(myblog);
+}
+
+
+export const updateblog=async(req,res)=>{
+    try{
+    const {id}=req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid blog id" });
+    }
+    const updateblog=await Blog.findByIdAndUpdate(id,req.body,{new:true});
+    if(!updateblog){
+        return res.status(400).json({message:"Blog not found"});
+    }
+    return res.status(200).json(updateblog);
+    }
+    catch(error){
+        console.log("error when update blog ", error );
+        return res.status(400).json({message:"Error when we update the blog"});
+    }   
 }

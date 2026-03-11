@@ -99,3 +99,13 @@ export const logout=(req,res)=>{
         return res.status(500).json({message:"This is the internal server error"});
     }
 }
+
+export const myprofile=async(req,res)=>{
+    const user=await req.user;
+    return res.status(200).json(user);
+}
+
+export const adminprofile=async(req,res)=>{
+    const admins=await User.find({role:"admin"});
+    return res.status(200).json(admins);
+}
