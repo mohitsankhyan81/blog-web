@@ -1,6 +1,6 @@
-import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const [name,setname]=useState("");
@@ -11,9 +11,36 @@ const Register = () => {
   const [education,seteducation]=useState("");
   const [password,setpassword]=useState("");
 
+  const handleRegister=async(e)=>{
+    e.preventDefault();
+    const formdata=new FormData()
+    formdata.append('name',name)
+    formdata.append('email',email)
+    formdata.append('phone',phone)
+    formdata.append('role',role)
+    formdata.append('photo',photo)
+    formdata.append('education',education)
+    formdata.append('password',password)
+    try{
+        const {data}=await axios.post("http://localhost:3433/api/user/register",formdata,{
+          withCredentials:true
+        });
+        console.log(data)
+        setname("")
+        setemail("")
+        setpassword("")
+        setphone("")
+        setphoto(null)
+        setrole("")
+        seteducation("")
+    }
+    catch(error){
+        console.log(error);
+    }
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form className="w-full max-w-sm bg-white p-6 rounded shadow space-y-3">
+      <form className="w-full max-w-sm bg-white p-6 rounded shadow space-y-3" onSubmit={handleRegister}>
 
         <div className="text-xl font-semibold text-center">
           Crazy<span className="text-sky-500">Blog</span>
@@ -43,14 +70,14 @@ const Register = () => {
           <option value="MBA">MBA</option>
         </select>
         <div>
-            <input type="file" value={photo} onChange={e=>setphoto(e.target.files)} className="w-full border px-3 py-2 rounded"/>
+            <input type="file"  onChange={e=>setphoto(e.target.files[0])} className="w-full border px-3 py-2 rounded"/>
         </div>
 
         <p className="text-sm text-center">
           Already registered? <Link to="/login" className="text-sky-500">Login Now</Link>
         </p>
 
-        <button className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
+        <button type="submit" className="w-full bg-sky-500 text-white py-2 rounded hover:bg-sky-600">
           Register
         </button>
 

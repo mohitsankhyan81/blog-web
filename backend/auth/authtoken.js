@@ -8,8 +8,6 @@ export const createjsonWebToken=async(userid,res)=>{
 
     res.cookie("jwt",token,{
         httpOnly:true,
-        secure:true,
-        sameSite:"strict"
     })
 
     await User.findByIdAndUpdate(userid,{token});

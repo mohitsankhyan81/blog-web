@@ -52,40 +52,42 @@ catch(error){
 }
 }
 
-export const login=async(req,res)=>{
-    const {email,role,password}=req.body;
-    try{
-        if(!email || !role || !password){
-            res.status(400).json({message:"Fill all the required fields"});
+export const login = async (req, res) => {
+
+    const { email, role, password } = req.body;
+
+    try {
+
+        if (!email || !role || !password) {
+            return res.status(400).json({ message: "Fill all fields" });
         }
 
-        const user=await User.findOne({email}).select("+password");
-        if(!user.password){
-            return res.status(400).json({message:"Password field is missing"});
+        const user = await User.findOne({ email }).select("+password");
+
+        if (!user) {
+            return res.status(400).json({ message: "User not found" });
         }
 
-        const isMatch=await bcrypt.compare(password,user.password);
-        if(!user || !isMatch){
-            return res.status(400).json({messege:"User password not match"})
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.status(400).json({ message: "Password incorrect" });
         }
 
-        if(user.role !=role){
-            return res.status(400).json({message:`Given role ${role} not found`})
+        if (user.role !== role) {
+            return res.status(400).json({ message: "Role incorrect" });
         }
-        const token=await createjsonWebToken(user._id,res);
-        res.status(200).json({message:"user login Successfuly",
-            user:{
-                _id:user._id,
-                name:user.name,
-                email:user.email,
-                role:user.role
-            },
-            token:token
-        })
-    }
-    catch(error){
-        console.log("Error in the login ",error);
-        return res.status(400).json({message:"Error comes in the login function"})
+
+        const token = await createjsonWebToken(user._id, res);
+
+        res.status(200).json({
+            message: "Login successful",
+            user,
+            token
+        });
+
+    } catch (error) {
+        console.log("Error in the login ", error);
     }
 }
 

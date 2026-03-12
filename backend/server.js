@@ -1,6 +1,6 @@
 import express from "express"
 import mongoose from "mongoose";
-import dotenv from "dotenv"
+import "dotenv/config"
 import fileUpload from "express-fileupload";
 import userRouter from "./router/user_router.js";
 import { v2 as cloudinary } from 'cloudinary';
@@ -8,7 +8,6 @@ import blogrouter from "./router/blog_router.js";
 import cookieParser from "cookie-parser";
 import cors from "cors"
 const app=express();
-dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded())
 app.use(cookieParser())
@@ -18,6 +17,8 @@ app.use(fileUpload({
 }))
 app.use(cors({
     origin:"http://localhost:5173",
+    credentials:true,
+    
 }))
 
 cloudinary.config({ 

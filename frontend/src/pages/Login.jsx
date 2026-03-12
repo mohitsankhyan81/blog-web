@@ -1,15 +1,37 @@
-import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [email,setemail]=useState("");
   const [password,setpassword]=useState("");
   const [role,setrole]=useState("");
+  
+  const submitlogin=async(e)=>{
+    e.preventDefault();
+    if(!email || !role || !password){
+        toast.success("All fields requierd");
+    }
+    try{
+        const {data}=await axios.post("http://localhost:3433/api/user/login",{email,password,role},{
+          withCredentials:true
+        })
+        console.log(data);
+        toast.success(data.message||"User Login Sucessfully");
+        setemail("");
+        setpassword("");
+        setrole("");
+        }
+    catch(error){
+        console.log(error);
+        toast.success(error.message||"Please Fill all the required Fields");
+    }
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form className="w-full max-w-sm bg-white p-6 rounded shadow space-y-3">
+      <form className="w-full max-w-sm bg-white p-6 rounded shadow space-y-3" onSubmit={submitlogin}>
         <div className="text-xl font-semibold text-center">
             Crazy<span className="text-sky-500">Blog</span>
         </div>

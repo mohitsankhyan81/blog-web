@@ -4,6 +4,7 @@ import { User } from "../model/user_model.js";
 //authentication
 export const isAuthenticate=async(req,res,next)=>{
     try{
+        console.log('req', req.cookies)
         const token=req.cookies.jwt;
         if(!token){
             return res.status(400).json({message:"user not verified"});

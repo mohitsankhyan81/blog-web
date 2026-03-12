@@ -9,15 +9,12 @@ import Contact from './pages/contact.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
-import { useAuth } from './context/AuthProvider.jsx'
-
+import { Toaster } from "react-hot-toast";
 const App = () => {
   const location=useLocation();
   const hideNavbarFooter=["/dashboard","/login","/register"].includes(
     location.pathname
   )
-  const {blog}=useAuth();
-  console.log(blog);
   return (
     <div>
       {!hideNavbarFooter && <Navbar/>}
@@ -30,6 +27,7 @@ const App = () => {
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
       </Routes>
+      <Toaster/>
       {!hideNavbarFooter && <Footer/>}
     </div>
   )

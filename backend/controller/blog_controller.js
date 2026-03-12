@@ -16,7 +16,7 @@ export const createBlog = async (req,res)=>{
             return res.status(400).json({message:"All fields are required"});
         }
 
-        const allowedformat = ["image/png","image/jpg","image/jpeg"];
+        const allowedformat = ["image/png","image/jpg","image/jpeg","image/avif"];
 
         if(!allowedformat.includes(blogImage.mimetype)){
             return res.status(400).json({message:"File format is not acceptable"});
@@ -26,7 +26,7 @@ export const createBlog = async (req,res)=>{
             blogImage.tempFilePath
         );
         const adminName=req?.user?.name;
-        const adminPhoto=req?.user?.photo;
+        const adminPhoto=req?.user?.photo?.url;
         const createby=req?.user?._id;
         const blogsave = await Blog.create({
             title,
