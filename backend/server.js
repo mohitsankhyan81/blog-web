@@ -7,6 +7,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import blogrouter from "./router/blog_router.js";
 import cookieParser from "cookie-parser";
 import cors from "cors"
+import contactrouter from "./router/contact_router.js";
 const app=express();
 app.use(express.json());
 app.use(express.urlencoded())
@@ -36,6 +37,7 @@ catch(error){
 }
 app.use("/api/blog",blogrouter);
 app.use("/api/user",userRouter);
+app.use("/api/cont",contactrouter)
 
 const port=process.env.PORT || 3433;
 app.listen(port,()=>{

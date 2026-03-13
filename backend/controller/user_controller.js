@@ -44,7 +44,7 @@ export const register=async(req,res)=>{
 
     if(newUser){
         const token= await createjsonWebToken(newUser._id,res)
-        res.status(201).json({message:"user register sucessfully",newUser:newUser,token:token});
+        res.status(201).json({message:"user register sucessfully",newUser:newUser});
     }
 }
 catch(error){

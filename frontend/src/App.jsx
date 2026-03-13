@@ -10,6 +10,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import { Toaster } from "react-hot-toast";
+import Creator from './pages/Creator.jsx'
 const App = () => {
   const location=useLocation();
   const hideNavbarFooter=["/dashboard","/login","/register"].includes(
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/blogs' element={<Blogs/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/creator'element={<Creator/>}></Route>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>

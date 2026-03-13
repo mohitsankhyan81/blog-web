@@ -13,7 +13,7 @@ const Navbar = () => {
         <ul className="flex items-center space-x-6">
           <li><Link to="/" className="hover:text-sky-400">Home</Link></li>
           <li><Link to="/blogs" className="hover:text-sky-400">Blogs</Link></li>
-          <li><Link to="/creators" className="hover:text-sky-400">Creators</Link></li>
+          <li><Link to="/creator" className="hover:text-sky-400">Creators</Link></li>
           <li><Link to="/about" className="hover:text-sky-400">About</Link></li>
           <li><Link to="/contact" className="hover:text-sky-400">Contact</Link></li>
         </ul>
