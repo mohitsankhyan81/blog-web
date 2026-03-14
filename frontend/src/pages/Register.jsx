@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../context/AuthProvider.jsx";
 
 const Register = () => {
+  const {setisAuthentication,setprofile}=useAuth();
+  const navigateeto=useNavigate();
   const [name,setname]=useState("");
   const [email,setemail]=useState("");
   const [phone,setphone]=useState("");
@@ -25,14 +28,17 @@ const Register = () => {
         const {data}=await axios.post("http://localhost:3433/api/user/register",formdata,{
           withCredentials:true
         });
+        setisAuthentication(true)
         console.log(data)
         setname("")
+        setprofile(data)
         setemail("")
         setpassword("")
         setphone("")
         setphoto(null)
         setrole("")
         seteducation("")
+        navigateeto("/login")
     }
     catch(error){
         console.log(error);

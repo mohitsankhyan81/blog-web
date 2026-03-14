@@ -4,13 +4,12 @@ import axios from "axios";
 export const authcontext = createContext();
 
 const AuthProvider = ({ children }) => {
-
   const [blog, setblog] = useState([]);
   const [profile, setprofile] = useState(null);
   const [isAuthentication, setisAuthentication] = useState(false);
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
-
     const fetchprofile = async () => {
       try {
         const { data } = await axios.get(
@@ -22,7 +21,10 @@ const AuthProvider = ({ children }) => {
         setisAuthentication(true);
 
       } catch (error) {
-        console.log(error);
+        console.log("Profile error:", error);
+        setisAuthentication(false);
+      } finally {
+        setloading(false);
       }
     };
 
@@ -32,21 +34,20 @@ const AuthProvider = ({ children }) => {
           "http://localhost:3433/api/blog/getallblog",
           { withCredentials: true }
         );
-
         setblog(response.data);
-
       } catch (error) {
-        console.log(error);
+        console.log("Blog fetch error:", error);
       }
     };
 
     fetchblog();
     fetchprofile();
-
   }, []);
 
   return (
-    <authcontext.Provider value={{ blog, profile, isAuthentication }}>
+    <authcontext.Provider
+      value={{ blog, profile, setprofile, isAuthentication, setisAuthentication, loading }}
+    >
       {children}
     </authcontext.Provider>
   );

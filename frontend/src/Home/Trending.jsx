@@ -29,7 +29,7 @@ const Trending = () => {
       {blog && blog.length > 0 ? (
         <Carousel responsive={responsive}>
           {blog.slice(0, 8).map((element) => (
-            <Link to={`/`} key={element._id}>
+            <Link to={`/blog/${element._id}`} key={element._id}>
               <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
 
                 <div className="h-40 w-full overflow-hidden">

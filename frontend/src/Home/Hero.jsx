@@ -14,7 +14,7 @@ const Hero = () => {
       {blog && blog.length > 0 ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {blog.slice(0, 4).map((element) => (
-            <Link to={`/`} key={element._id}>
+            <Link to={`/blog/${element._id}`} key={element._id}>
               
               <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
                                 <div className="h-48 w-full overflow-hidden">

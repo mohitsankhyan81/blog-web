@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthProvider.jsx";
 
 const Login = () => {
   const [email,setemail]=useState("");
   const [password,setpassword]=useState("");
   const [role,setrole]=useState("");
-  
+  const {setisAuthentication,setprofile}=useAuth();
+  const navigateto=useNavigate();
   const submitlogin=async(e)=>{
     e.preventDefault();
     if(!email || !role || !password){
@@ -21,7 +23,10 @@ const Login = () => {
         toast.success(data.message||"User Login Sucessfully");
         setemail("");
         setpassword("");
+        setprofile(data)
         setrole("");
+        setisAuthentication(true)
+        navigateto("/")
         }
     catch(error){
         console.log(error);

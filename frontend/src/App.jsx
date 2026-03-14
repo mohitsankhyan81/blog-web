@@ -11,11 +11,15 @@ import Register from './pages/Register.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import { Toaster } from "react-hot-toast";
 import Creator from './pages/Creator.jsx'
+import Updateblog from './dashboard/Updateblog.jsx'
+import Detail from './pages/Detail.jsx'
+import NotFount from './pages/NotFount.jsx'
 const App = () => {
   const location=useLocation();
   const hideNavbarFooter=["/dashboard","/login","/register"].includes(
     location.pathname
   )
+
   return (
     <div>
       {!hideNavbarFooter && <Navbar/>}
@@ -28,6 +32,12 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
+
+
+        <Route path='/blog/:id' element={<Detail/>}/>
+        <Route path='/blog/update/:id' element={<Updateblog />}/>
+
+        <Route path='*' element={<NotFount/>}/>
       </Routes>
       <Toaster/>
       {!hideNavbarFooter && <Footer/>}
