@@ -6,7 +6,7 @@ const Devotional = () => {
   const { blog } = useAuth();
 
   const car = blog?.filter(
-    (item) => item.cat?.toLowerCase() === "tesla"
+    (item) => item.cat?.toLowerCase() === "religion"
   );
 
   return (
@@ -14,13 +14,11 @@ const Devotional = () => {
       <div className="max-w-7xl mx-auto px-4">
 
         <h1 className="text-4xl font-bold text-center mb-4 text-gray-900">
-          Tesla Electric Cars
+          Religion Blog
         </h1>
 
         <p className="text-center text-gray-600 max-w-2xl mx-auto mb-12">
-          Tesla cars are powered by advanced electric technology. 
-          They provide high performance, long battery life and 
-          eco-friendly driving experience with ranges up to 500-600 km.
+          Religion is a system of beliefs and practices connecting humans to the divine. It guides morals, values, rituals, and community, offering purpose, spiritual growth, and a sense of belonging in life.
         </p>
 
         {car && car.length > 0 ? (

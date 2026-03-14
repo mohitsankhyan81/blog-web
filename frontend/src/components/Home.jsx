@@ -7,11 +7,11 @@ import { useAuth } from "../context/AuthProvider.jsx";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { isAuthentication,loading } = useAuth();
+  const { isAuthentication,loading,profile } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!loading && !isAuthentication) {
+    if (!loading && !isAuthentication &&!profile) {
       navigate("/login");
     }
   }, [isAuthentication,loading,navigate]);

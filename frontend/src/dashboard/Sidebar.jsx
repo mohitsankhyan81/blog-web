@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 const Sidebar = ({ setcomponent }) => {
   const { profile, setisAuthentication } = useAuth();
   const navigate = useNavigate();
-  console.log(profile?.user)
+  console.log(profile?.role)
   const handleComponent = (value) => {
     setcomponent(value);
   };
@@ -34,11 +34,11 @@ const Sidebar = ({ setcomponent }) => {
     <div className="w-64 h-screen bg-gray-100 shadow-md flex flex-col items-center p-6">
       <div className="flex flex-col items-center mb-8">
         <img
-          src={profile?.user?.photo?.url}
+          src={profile?.photo?.url}
           alt=""
           className="w-20 h-20 rounded-full object-cover mb-2"
         />
-        <p className="font-semibold text-gray-700">{profile?.user?.name}</p>
+        <p className="font-semibold text-gray-700">{profile?.name}</p>
       </div>
 
       <div className="flex flex-col gap-3 w-full">

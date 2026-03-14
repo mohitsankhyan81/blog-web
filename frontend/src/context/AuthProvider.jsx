@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
           { withCredentials: true }
         );
 
-        setprofile(data);
+        setprofile(data.user);
         setisAuthentication(true);
 
       } catch (error) {
