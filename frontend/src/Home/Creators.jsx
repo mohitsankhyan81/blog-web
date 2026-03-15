@@ -28,7 +28,7 @@ const Creators = () => {
 
       {admin && admin.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 place-items-center">
-          {admin.map((item) => (
+          {admin.slice(0, 5).map((item) => ( // <-- only first 5 admins
             <div
               key={item._id}
               className="flex flex-col items-center bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition"

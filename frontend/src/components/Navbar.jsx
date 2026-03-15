@@ -43,14 +43,16 @@ const Navbar = () => {
         <div className="flex items-center space-x-3">
 
     <div className="flex items-center space-x-3">
-      {!loading && isAuthentication && profile?.role === "admin" && (
+      {/* {!loading && isAuthentication && profile?.role === "admin" && ( */}
+      {!loading&& isAuthentication && profile?.role?.toLowerCase() != 'user' &&
     <Link
       to="/dashboard"
       className="px-4 py-1.5 bg-sky-500 text-black rounded"
     >
       Dashboard
     </Link>
-  )}
+}
+  {/* )} */}
 
    {!isAuthentication ? (
     <Link
