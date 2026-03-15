@@ -9,8 +9,7 @@ const AuthProvider = ({ children }) => {
   const [isAuthentication, setisAuthentication] = useState(false);
   const [loading, setloading] = useState(true);
 
-  useEffect(() => {
-    const fetchprofile = async () => {
+      const fetchprofile = async () => {
       try {
         const { data } = await axios.get(
           "http://localhost:3433/api/user/myprofile",
@@ -28,6 +27,7 @@ const AuthProvider = ({ children }) => {
         setloading(false);
       }
     };
+  useEffect(() => {
 
     const fetchblog = async () => {
       try {
@@ -40,14 +40,13 @@ const AuthProvider = ({ children }) => {
         console.log("Blog fetch error:", error);
       }
     };
-
-    fetchblog();
     fetchprofile();
+    fetchblog();
   }, []);
 
   return (
     <authcontext.Provider
-      value={{ blog, profile, setprofile, isAuthentication, setisAuthentication, loading }}
+      value={{ blog, profile, setprofile, isAuthentication, setisAuthentication, loading ,fetchprofile}}
     >
       {children}
     </authcontext.Provider>

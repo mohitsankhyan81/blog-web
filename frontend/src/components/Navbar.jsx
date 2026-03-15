@@ -5,16 +5,16 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 const Navbar = () => {
-  const { profile, isAuthentication, setisAuthentication,loading } = useAuth();
+  const { profile, isAuthentication, setisAuthentication, loading } = useAuth();
   const navigator = useNavigate();
-  console.log(profile?.role)
-  console.log(isAuthentication)
+
   const handlelogout = async (e) => {
     try {
       e.preventDefault();
       await axios.get("http://localhost:3433/api/user/logout", {
         withCredentials: true,
       });
+
       toast.success("Logout Successfully");
       setisAuthentication(false);
       navigator("/login");
@@ -42,34 +42,31 @@ const Navbar = () => {
 
         <div className="flex items-center space-x-3">
 
-    <div className="flex items-center space-x-3">
-      {/* {!loading && isAuthentication && profile?.role === "admin" && ( */}
-      {!loading&& isAuthentication && profile?.role?.toLowerCase() != 'user' &&
-    <Link
-      to="/dashboard"
-      className="px-4 py-1.5 bg-sky-500 text-black rounded"
-    >
-      Dashboard
-    </Link>
-}
-  {/* )} */}
+          {!loading && isAuthentication && profile?.role !== "user" && (
+            <Link
+              to="/dashboard"
+              className="px-4 py-1.5 bg-sky-500 text-black rounded"
+            >
+              Dashboard
+            </Link>
+          )}
 
-   {!isAuthentication ? (
-    <Link
-      to="/login"
-      className="px-4 py-1.5 bg-white text-black rounded"
-    >
-      Login
-    </Link>
-  ) : (
-    <button
-      onClick={handlelogout}
-      className="px-4 py-1.5 bg-white text-black rounded"
-    >
-      Logout
-    </button>
-  )}
-  </div>
+          {!isAuthentication ? (
+            <Link
+              to="/login"
+              className="px-4 py-1.5 bg-white text-black rounded"
+            >
+              Login
+            </Link>
+          ) : (
+            <button
+              onClick={handlelogout}
+              className="px-4 py-1.5 bg-white text-black rounded"
+            >
+              Logout
+            </button>
+          )}
+
         </div>
 
       </div>
