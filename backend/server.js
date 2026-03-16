@@ -17,11 +17,9 @@ app.use(fileUpload({
     tempFileDir:"/tmp/"
 }))
 app.use(cors({
-    origin:process.env.FRONT_END,
+    origin: process.env.FRONT_END,
     credentials:true,
-    
 }))
-
 cloudinary.config({ 
     cloud_name:process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,

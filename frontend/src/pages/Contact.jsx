@@ -19,7 +19,7 @@ const Contact = () => {
     console.log("data")
     try{
       const {data}=await axios.post(
-        "http://localhost:3433/api/cont/contact",
+        `http://localhost:3433/api/cont/contact`,
         formdata,
         {withCredentials:true}
       );

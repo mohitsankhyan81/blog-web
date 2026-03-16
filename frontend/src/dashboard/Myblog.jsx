@@ -10,7 +10,7 @@ const Myblog = () => {
     const fetchblogdata = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3433/api/blog/myblog",
+          `http://localhost:3433/api/blog/myblog`,
           { withCredentials: true }
         );
         setblog(data);

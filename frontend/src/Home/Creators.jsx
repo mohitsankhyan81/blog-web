@@ -11,7 +11,7 @@ const Creators = () => {
           "http://localhost:3433/api/user/admins",
           { withCredentials: true }
         );
-        console.log(data);
+        console.log('data is', data);
         setadmin(data);
       } catch (error) {
         console.log("err", error.response);
@@ -19,16 +19,16 @@ const Creators = () => {
     };
     admindata();
   }, []);
-
+  console.log('data is', )
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">
         Admin
       </h1>
 
-      {admin && admin.length > 0 ? (
+      {admin && admin?.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 place-items-center">
-          {admin.slice(0, 5).map((item) => ( // <-- only first 5 admins
+          {admin?.slice(0, 5).map((item) => ( // <-- only first 5 admins
             <div
               key={item._id}
               className="flex flex-col items-center bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition"

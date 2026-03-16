@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthProvider.jsx";
 
 const Login = () => {
-  const [email,setemail]=useState("");
-  const [password,setpassword]=useState("");
+  const [email,setemail]=useState("sahil@gmail.com");
+  const [password,setpassword]=useState("Mohit@**1");
   const [role,setrole]=useState("");
   const {setisAuthentication,setprofile}=useAuth();
   const navigateto=useNavigate();
@@ -16,7 +16,7 @@ const Login = () => {
         toast.success("All fields requierd");
     }
     try{
-        const {data}=await axios.post("http://localhost:3433/api/user/login",{email,password,role},{
+        const {data}=await axios.post(`http://localhost:3433/api/user/login`,{email,password,role},{
           withCredentials:true
         })
         console.log(data);
@@ -30,7 +30,7 @@ const Login = () => {
         }
     catch(error){
         console.log(error);
-        toast.success(error.message||"Please Fill all the required Fields");
+        toast.error(error?.response?.data?.message ||"Please Fill all the required Fields");
     }
   }
 

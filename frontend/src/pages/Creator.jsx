@@ -7,7 +7,7 @@ const [create,setcreator]=useState([])
 
 useEffect(()=>{
 const admindata=async()=>{
-const {data}=await axios.get("http://localhost:3433/api/user/admins",{withCredentials:true})
+const {data}=await axios.get(`http://localhost:3433/api/user/admins`,{withCredentials:true})
 setcreator(data)
 }
 admindata()

@@ -11,7 +11,7 @@ const Navbar = () => {
   const handlelogout = async (e) => {
     try {
       e.preventDefault();
-      await axios.get("http://localhost:3433/api/user/logout", {
+      await axios.get(`http://localhost:3433/api/user/logout`, {
         withCredentials: true,
       });
 
