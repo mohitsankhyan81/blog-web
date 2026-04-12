@@ -10,7 +10,7 @@ const Myblog = () => {
     const fetchblogdata = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3433/api/blog/myblog`,
+          `https://blog-web-mx42.onrender.com/api/blog/myblog`,
           { withCredentials: true }
         );
         setblog(data);
@@ -25,7 +25,7 @@ const Myblog = () => {
   const handledelete = async (id) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3433/api/blog/delete/${id}`,
+        `https://blog-web-mx42.onrender.com/api/blog/delete/${id}`,
         { withCredentials: true }
       );
 

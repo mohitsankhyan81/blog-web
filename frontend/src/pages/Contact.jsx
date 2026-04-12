@@ -19,7 +19,7 @@ const Contact = () => {
     console.log("data")
     try{
       const {data}=await axios.post(
-        `http://localhost:3433/api/cont/contact`,
+        `https://blog-web-mx42.onrender.com/api/cont/contact`,
         formdata,
         {withCredentials:true}
       );

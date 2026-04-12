@@ -16,7 +16,7 @@ const Login = () => {
         toast.success("All fields requierd");
     }
     try{
-        const {data}=await axios.post(`http://localhost:3433/api/user/login`,{email,password,role},{
+        const {data}=await axios.post(`https://blog-web-mx42.onrender.com/api/user/login`,{email,password,role},{
           withCredentials:true
         })
         console.log(data);

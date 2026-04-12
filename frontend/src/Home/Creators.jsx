@@ -8,7 +8,7 @@ const Creators = () => {
     const admindata = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3433/api/user/admins",
+          "https://blog-web-mx42.onrender.com/api/user/admins",
           { withCredentials: true }
         );
         console.log('data is', data);

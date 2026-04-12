@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
       const fetchprofile = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3433/api/user/myprofile`,
+          `https://blog-web-mx42.onrender.com/api/user/myprofile`,
           { withCredentials: true }
         );
 
@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     const fetchblog = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3433/api/blog/getallblog`,
+          `https://blog-web-mx42.onrender.com/api/blog/getallblog`,
           { withCredentials: true }
         );
         setblog(response.data);

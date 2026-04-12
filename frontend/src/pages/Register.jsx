@@ -25,7 +25,7 @@ const Register = () => {
     formdata.append('education',education)
     formdata.append('password',password)
     try{
-        const {data}=await axios.post(`http://localhost:3433/api/user/register`,formdata,{
+        const {data}=await axios.post(`https://blog-web-mx42.onrender.com/api/user/register`,formdata,{
           withCredentials:true
         });
         setisAuthentication(true)
