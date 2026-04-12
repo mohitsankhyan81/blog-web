@@ -12,9 +12,21 @@ const app=express();
 app.use(express.json());
 app.use(express.urlencoded())
 app.use(cookieParser())
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://blog-lv1iy93h1-mohits-projects-9ef18b28.vercel.app",
+  "https://blog-web-git-main-mohits-projects-9ef18b28.vercel.app"
+];
+
 app.use(cors({
-    origin: process.env.FRONT_END,
-    credentials: true
+  origin: function(origin, callback){
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS blocked"));
+    }
+  },
+  credentials: true
 }));
 app.use(fileUpload({
     useTempFiles:true,
