@@ -6,9 +6,11 @@ export const createjsonWebToken=async(userid,res)=>{
         expiresIn:"7d"
     })
 
-    res.cookie("jwt",token,{
-        httpOnly:false,
-    })
+    res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None"
+    });
 
     await User.findByIdAndUpdate(userid,{token});
     return token
