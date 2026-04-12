@@ -5,8 +5,8 @@ import toast from "react-hot-toast";
 import { useAuth } from "../context/AuthProvider.jsx";
 
 const Login = () => {
-  const [email,setemail]=useState("sahil@gmail.com");
-  const [password,setpassword]=useState("Mohit@**1");
+  const [email,setemail]=useState("");
+  const [password,setpassword]=useState("");
   const [role,setrole]=useState("");
   const {setisAuthentication,setprofile}=useAuth();
   const navigateto=useNavigate();
