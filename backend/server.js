@@ -19,8 +19,8 @@ app.use(fileUpload({
 
 
 app.use(cors({
-    origin:process.env.FRONT_END,
-    credentials:true
+    origin: true,
+    credentials: true
 }));
 cloudinary.config({ 
     cloud_name:process.env.CLOUD_NAME,
