@@ -6,7 +6,7 @@ export const createjsonWebToken=async(userid,res)=>{
         expiresIn:"7d"
     })
 
-    res.cookie("token", token, {
+    res.cookie("jwt", token, {
     httpOnly: true,
     secure: true,
     sameSite: "None"
