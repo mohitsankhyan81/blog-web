@@ -16,20 +16,11 @@ app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/tmp/"
 }))
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://blog-lv1iy93h1-mohits-projects-9ef18b28.vercel.app"
-];
+
 
 app.use(cors({
-  origin: function(origin, callback){
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS blocked"));
-    }
-  },
-  credentials: true
+    origin:process.env.FRONT_END,
+    credentials:true
 }));
 cloudinary.config({ 
     cloud_name:process.env.CLOUD_NAME,
